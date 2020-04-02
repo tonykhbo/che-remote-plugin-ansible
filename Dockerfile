@@ -22,7 +22,7 @@ ENV HOME=/home/theia
 RUN yum install -y --disableplugin=subscription-manager https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y --disableplugin=subscription-manager nodejs sshpass
 
-RUN yum install -y openssh-server
+RUN yum -y install openssh-server epel-release
 RUN mkdir /var/run/sshd
 RUN echo 'root:password' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
