@@ -24,13 +24,13 @@ RUN yum install -y --disableplugin=subscription-manager nodejs sshpass
 
 RUN	pip install --upgrade pip && \
     pip install --no-cache-dir virtualenv && \
-    pip install --upgrade setuptools && \
+    pip install --upgrade setuptools
     
-RUN  curl -s -o /tmp/oc.tar.gz https://mirror.openshift.com/pub/	openshift-v4/clients/oc/4.3/linux/oc.tar.gz && \
+RUN curl -s -o /tmp/oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/oc/4.3/linux/oc.tar.gz && \
     tar -C /usr/local/bin -zxf /tmp/oc.tar.gz oc && \
     mv /usr/local/bin/oc /usr/local/bin/oc-4.3 && \
     ln -s /usr/local/bin/oc-4.3 /usr/local/bin/kubectl-1.16 && \
-    rm /tmp/oc.tar.gz \
+    rm /tmp/oc.tar.gz
     curl -sL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl && \
     mv /usr/local/bin/kubectl /usr/local/bin/kubectl-1.12 && \
     chmod +x /usr/local/bin/kubectl-1.12
