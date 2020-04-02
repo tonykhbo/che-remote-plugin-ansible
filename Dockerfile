@@ -22,17 +22,6 @@ ENV HOME=/home/theia
 RUN yum install -y --disableplugin=subscription-manager https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN yum install -y --disableplugin=subscription-manager nodejs sshpass
 
-RUN yum -y install openssh-server epel-release
-RUN mkdir /var/run/sshd
-RUN echo 'root:password' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-
-# SSH login fix. Otherwise user is kicked off after login
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-ENV NOTVISIBLE "in users profile"
-RUN echo "export VISIBLE=now" >> /etc/profile
-
 RUN	pip install --upgrade pip && \
     pip install --no-cache-dir virtualenv && \
     pip install --upgrade setuptools
@@ -88,8 +77,7 @@ RUN chmod -R 777 ${HOME} /etc/passwd /etc/group
 
 USER node
 
-EXPOSE 22
-ENTRYPOINT ["bash", "/usr/sbin/sshd", "-D", "/entrypoint.sh"]
+ENTRYPOINT ["bash", "/entrypoint.sh"]
 
 
 
