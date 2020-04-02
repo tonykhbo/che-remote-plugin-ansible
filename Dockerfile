@@ -24,7 +24,8 @@ RUN yum install -y --disableplugin=subscription-manager nodejs sshpass
 
 RUN	pip install --upgrade pip && \
     pip install --no-cache-dir virtualenv && \
-    pip install --upgrade setuptools
+    pip install --upgrade setuptools && \
+    pip install --upgrade openshift
 
 RUN pip install "ansible==${ANSIBLE_VERSION}" \
 	pylint \
