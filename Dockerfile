@@ -77,8 +77,6 @@ COPY --from=endpoint /entrypoint.sh /entrypoint.sh
 
 RUN chmod -R 777 ${HOME} /etc/passwd /etc/group
 
-USER node
-
 EXPOSE 22
 
 ENTRYPOINT ["bash", "/entrypoint.sh"]
