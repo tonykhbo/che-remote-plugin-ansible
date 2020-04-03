@@ -14,6 +14,8 @@ FROM eclipse/che-theia-endpoint-runtime:${CHE_RUNTIME_VERSION} as endpoint
 FROM registry.access.redhat.com/ubi7/python-${PYTHON_VERSION}:latest
 USER root
 
+RUN echo 'root:Docker!' | chpasswd
+
 # ANSIBLE VERSION
 ENV ANSIBLE_VERSION 2.8.5
 
@@ -76,6 +78,8 @@ COPY --from=endpoint /entrypoint.sh /entrypoint.sh
 RUN chmod -R 777 ${HOME} /etc/passwd /etc/group
 
 USER node
+
+EXPOSE 22
 
 ENTRYPOINT ["bash", "/entrypoint.sh"]
 
